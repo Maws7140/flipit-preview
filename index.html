@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<title>Flip It Co — Custom Builds &amp; Remodeling | State College, PA</title>
+<meta name="description" content="Custom builds, remodeling, and we buy houses as-is. Centre and Mifflin County, PA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Caveat:wght@500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0A0A;--paper:#FFFFFF;--grey:#8C8A85;--plaster:#E6E4DF;
+  --marker:#E8C547;
+  --line:rgba(255,255,255,.16);--line-dark:rgba(10,10,10,.14);
+  --display:"Playfair Display",Georgia,serif;
+  --body:"Archivo",system-ui,sans-serif;
+  --hand:"Caveat",cursive;
+  --pad:clamp(20px,5vw,72px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--marker);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:var(--pad)}
+
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--grey);margin:0 0 16px}
+.h2{font-family:var(--display);font-weight:700;font-size:clamp(1.9rem,4vw,3rem);line-height:1.08;letter-spacing:-.01em;margin:0 0 18px}
+.lede{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--grey);max-width:52ch;margin:0}
+
+/* ---------- annotation layer ---------- */
+.mark{font-family:var(--hand);color:var(--marker);font-size:clamp(1.05rem,1.9vw,1.35rem);line-height:1.35;font-weight:600;display:block;max-width:40ch;margin:14px 0;padding-left:26px;position:relative;transform:rotate(-.6deg);transform-origin:left center}
+.mark::before{content:"↳";position:absolute;left:0;top:0;opacity:.75;font-size:1.05em}
+.mark--tight{margin:8px 0}
+.mark--center{margin-inline:auto;text-align:left}
+body.notes-off .mark{display:none}
+.toggle{font-family:var(--hand);font-size:1.05rem;font-weight:600;background:transparent;border:1px dashed var(--marker);color:var(--marker);padding:7px 14px;cursor:pointer;white-space:nowrap;line-height:1.2}
+.toggle:hover{background:var(--marker);color:var(--ink)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px}
+.lockup{display:flex;align-items:center;gap:13px;text-decoration:none}
+.lockup__name{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap}
+.nav__links{display:flex;gap:28px;align-items:center}
+.nav__links a{text-decoration:none;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--grey)}
+.nav__links a:hover{color:var(--paper)}
+@media(max-width:1000px){.nav__links{display:none}}
+
+/* ================= HERO — the flip is the hero ================= */
+.stage{
+  position:relative;width:100%;
+  perspective:2200px;perspective-origin:50% 50%;
+  padding:0;
+}
+.stage__inner{
+  position:relative;width:100%;height:clamp(400px,66vh,660px);
+  transform-style:preserve-3d;
+  transition:transform 1.05s cubic-bezier(.45,.03,.15,1);
+  will-change:transform;cursor:pointer;
+}
+.stage.is-flipped .stage__inner{transform:rotateX(180deg)}
+.face{
+  position:absolute;inset:0;backface-visibility:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:var(--pad);overflow:hidden;
+}
+.face--after{transform:rotateX(180deg)}
+.face__bg{
+  position:absolute;inset:0;z-index:0;
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.045) 0 1px,transparent 1px 40px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px 40px),
+    #121212;
+}
+.face--after .face__bg{
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 40px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 40px),
+    #191919;
+}
+.face__bg::after{
+  content:attr(data-label);position:absolute;top:50%;left:0;right:0;
+  transform:translateY(-50%);text-align:center;padding:0 24px;
+  font-family:var(--hand);font-size:clamp(1rem,2vw,1.3rem);color:rgba(232,197,71,.4);
+}
+.face::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(10,10,10,.5) 0%,rgba(10,10,10,.05) 34%,rgba(10,10,10,.05) 66%,rgba(10,10,10,.35) 100%)}
+
+.face__state{
+  position:absolute;top:var(--pad);left:var(--pad);z-index:2;
+  font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+  background:var(--paper);color:var(--ink);padding:7px 13px;
+}
+.face--after .face__state{background:var(--marker)}
+.face__cue{
+  position:absolute;top:var(--pad);right:var(--pad);z-index:2;
+  font-family:var(--hand);font-size:1.1rem;color:rgba(255,255,255,.5);
+}
+
+/* the mirror axis — echoes the logo's reflection line */
+.stage::after{
+  content:"";position:absolute;left:0;right:0;top:50%;height:1px;z-index:6;
+  background:linear-gradient(90deg,transparent,rgba(232,197,71,.55) 18%,rgba(232,197,71,.55) 82%,transparent);
+  pointer-events:none;opacity:0;transition:opacity .35s;
+}
+.stage.is-turning::after{opacity:1}
+
+.underbar{border-block:1px solid var(--line)}
+.underbar__in{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  padding-block:clamp(26px,3.4vw,38px);
+}
+.ub{padding-inline:clamp(16px,2.4vw,34px);border-left:1px solid var(--line)}
+.ub:first-child{border-left:0;padding-left:0}
+.ub:last-child{padding-right:0}
+.ub__label{
+  display:block;font-size:10px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--grey);margin-bottom:9px;
+}
+.ub__val{
+  display:block;font-family:var(--display);font-weight:700;
+  font-size:clamp(1rem,1.5vw,1.28rem);line-height:1.25;
+  letter-spacing:.01em;color:var(--paper);text-decoration:none;
+}
+a.ub__val:hover{color:var(--marker)}
+@media(max-width:900px){
+  .underbar__in{grid-template-columns:repeat(2,1fr);gap:26px 0}
+  .ub:nth-child(odd){border-left:0;padding-left:0}
+  .ub:nth-child(even){padding-right:0}
+}
+@media(max-width:520px){
+  .underbar__in{grid-template-columns:1fr;gap:0}
+  .ub{border-left:0;padding:16px 0;border-top:1px solid var(--line)}
+  .ub:first-child{border-top:0;padding-top:0}
+  .ub:last-child{padding-bottom:0}
+}
+
+.altbox{padding:clamp(30px,5vw,52px) 0}
+body.notes-off .altbox{display:none}
+
+/* ---------- flip cards ---------- */
+.work{padding:clamp(48px,8vw,92px) 0}
+.work__head{margin-bottom:34px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:940px){.cards{grid-template-columns:1fr;gap:16px}}
+.flip{appearance:none;border:0;padding:0;background:none;font:inherit;color:inherit;perspective:1500px;cursor:pointer;display:block;width:100%;text-align:left}
+.flip__inner{position:relative;display:block;width:100%;aspect-ratio:4/5;transform-style:preserve-3d;transition:transform .78s cubic-bezier(.4,.05,.2,1);will-change:transform}
+.flip__face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end;padding:20px;overflow:hidden}
+.flip__face--after{transform:rotateX(180deg)}
+@media(hover:hover){.flip:hover .flip__inner,.flip:focus-visible .flip__inner{transform:rotateX(180deg)}}
+.flip.is-flipped .flip__inner{transform:rotateX(180deg)}
+.tag{position:absolute;top:16px;left:16px;z-index:2;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;background:var(--paper);color:var(--ink);padding:6px 11px}
+.flip__face--after .tag{background:var(--marker);color:var(--ink)}
+.flip__meta{position:relative;z-index:2}
+.flip__meta strong{display:block;font-family:var(--display);font-size:1.2rem;font-weight:700;margin-bottom:3px}
+.flip__meta span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
+.photo{position:absolute;inset:0;z-index:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 32px),repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 32px),#141414}
+.photo::after{content:attr(data-label);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-family:var(--hand);font-size:1.15rem;color:rgba(232,197,71,.55)}
+.flip__face::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(10,10,10,.9) 0%,rgba(10,10,10,0) 55%)}
+
+/* ---------- services ---------- */
+.svc{background:var(--plaster);color:var(--ink);padding:clamp(56px,9vw,100px) 0}
+.svc .eyebrow{color:rgba(10,10,10,.5)}
+.svc .mark{color:#8A6D0F}
+.svc__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-dark);margin-top:40px}
+@media(max-width:860px){.svc__grid{grid-template-columns:1fr}}
+.svc__item{background:var(--plaster);padding:34px 28px 38px}
+.svc__item h3{font-family:var(--display);font-size:1.55rem;font-weight:700;margin:0 0 10px}
+.svc__item p{margin:0;color:rgba(10,10,10,.68);font-size:.96rem}
+.svc__num{font-size:11px;font-weight:600;letter-spacing:.2em;color:rgba(10,10,10,.4);display:block;margin-bottom:18px}
+
+/* ---------- sell ---------- */
+.sell{padding:clamp(56px,9vw,100px) 0;border-bottom:1px solid var(--line)}
+.sell__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,72px);align-items:start}
+@media(max-width:880px){.sell__grid{grid-template-columns:1fr}}
+.sell ul{list-style:none;padding:0;margin:24px 0 0}
+.sell li{padding:14px 0;border-top:1px solid var(--line);font-size:.97rem;color:var(--grey)}
+.sell li strong{color:var(--paper);font-weight:500}
+/* ---------- house form ---------- */
+.house{position:relative;padding-top:6px}
+.house__roof{display:block;width:100%;height:clamp(58px,7vw,86px)}
+.house__walls{
+  border:3px solid var(--paper);border-top:0;
+  margin:0 auto;width:88%;
+  position:relative;
+}
+.rooms{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--paper)}
+.room{background:var(--ink);padding:16px 16px 14px;min-width:0;transition:background .15s}
+.room--wide{grid-column:1 / -1}
+.room:focus-within{background:#17150C;box-shadow:inset 0 0 0 2px var(--marker)}
+.room label{
+  display:block;font-size:10px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--grey);margin-bottom:8px;
+}
+.room input,.room textarea{
+  width:100%;background:transparent;border:0;outline:0;
+  color:var(--paper);font-family:var(--body);font-size:15px;padding:0;
+  caret-color:var(--marker);
+}
+.room textarea{resize:vertical;min-height:74px;line-height:1.5}
+.room input::placeholder,.room textarea::placeholder{color:rgba(255,255,255,.22)}
+
+.yard{
+  border-top:3px solid var(--paper);
+  display:flex;justify-content:center;align-items:flex-end;
+  padding-top:26px;
+}
+.door{
+  position:relative;
+  width:clamp(190px,58%,290px);min-height:88px;
+  border:3px solid var(--paper);border-bottom:0;
+  background:var(--ink);color:var(--paper);
+  font-family:var(--body);font-size:11px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;line-height:1.5;
+  cursor:pointer;padding:20px 18px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  transition:background .16s,color .16s;
+}
+.door::after{
+  content:"";position:absolute;right:14px;top:50%;
+  width:9px;height:9px;background:var(--paper);
+  transform:translateY(-50%);transition:background .16s;
+}
+.door:hover,.door:focus-visible{background:var(--marker);color:var(--ink)}
+.door:hover::after,.door:focus-visible::after{background:var(--ink)}
+@media(max-width:560px){
+  .rooms{grid-template-columns:1fr}
+  .house__walls{width:100%}
+}
+.btn{font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:16px 26px;border:1px solid var(--paper);background:var(--paper);color:var(--ink);text-decoration:none;cursor:pointer;display:inline-block;transition:background .18s,color .18s}
+.btn:hover{background:transparent;color:var(--paper)}
+
+/* ---------- area ---------- */
+.area{padding:clamp(52px,8vw,90px) 0;text-align:center}
+.area .mark{margin-inline:auto}
+.area__towns{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin-top:28px;max-width:820px;margin-inline:auto}
+.area__towns span{font-family:var(--display);font-size:clamp(1rem,2.3vw,1.45rem);font-weight:700;color:var(--grey)}
+.area__towns span:nth-child(3n+1){color:var(--paper)}
+
+/* ---------- pitch ---------- */
+.pitch{background:var(--marker);color:var(--ink);padding:clamp(56px,9vw,100px) 0}
+.pitch .h2{max-width:20ch}
+.pitch p{max-width:56ch;font-size:1.05rem;color:rgba(10,10,10,.78)}
+.pitch__sign{font-family:var(--hand);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:600;margin:36px 0 0;line-height:1.2}
+.pitch__contact{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:14px;font-weight:600;letter-spacing:.06em}
+.pitch__contact a{color:var(--ink)}
+body.notes-off .pitch{display:none}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--line);padding:48px 0 38px}
+.foot__in{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:flex-start}
+.foot a{text-decoration:none;color:var(--grey);font-size:14px;display:block;margin-bottom:8px}
+.foot a:hover{color:var(--paper)}
+.foot__legal{font-size:12px;color:var(--grey);margin-top:32px;letter-spacing:.04em}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  .mark{transform:none}
+  .stage__inner{transform:none!important}
+  .face--after{transform:none;opacity:0;transition:opacity .2s!important;backface-visibility:visible}
+  .stage.is-flipped .face--after{opacity:1}
+  .flip__inner{transform:none!important}
+  .flip__face--after{transform:none;opacity:0;transition:opacity .2s!important;backface-visibility:visible}
+  .flip:hover .flip__face--after,.flip:focus-visible .flip__face--after,.flip.is-flipped .flip__face--after{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav__in">
+    <a class="lockup" href="#top">
+      <svg width="40" height="30" viewBox="0 0 132 96" fill="none" aria-hidden="true">
+        <g stroke="#fff" stroke-width="7" transform="rotate(180 33 48)"><path d="M4 44 36 14 68 44"/><path d="M15 40v34h42V40"/></g>
+        <rect x="26" y="44" width="8" height="8" fill="#fff"/><rect x="38" y="44" width="8" height="8" fill="#fff"/>
+        <rect x="26" y="56" width="8" height="8" fill="#fff"/><rect x="38" y="56" width="8" height="8" fill="#fff"/>
+        <g stroke="#fff" stroke-width="7"><path d="M64 44 96 14 128 44"/><path d="M75 40v34h42V40"/></g>
+        <rect x="86" y="44" width="8" height="8" fill="#fff"/><rect x="98" y="44" width="8" height="8" fill="#fff"/>
+        <rect x="86" y="56" width="8" height="8" fill="#fff"/><rect x="98" y="56" width="8" height="8" fill="#fff"/>
+      </svg>
+      <span class="lockup__name">Flip It Co</span>
+    </a>
+    <div class="nav__links">
+      <a href="#work">Work</a><a href="#services">Services</a><a href="#sell">Sell your house</a><a href="#area">Service area</a>
+    </div>
+    <button class="toggle" id="toggle" type="button">hide my notes</button>
+  </div>
+</nav>
+
+<div class="stage" id="stage" role="button" tabindex="0" aria-label="Flip between before and after">
+  <div class="stage__inner">
+    <div class="face">
+      <span class="face__bg" data-label="your worst before photo goes here"></span>
+      <span class="face__state">Before</span>
+      <span class="face__cue">click to flip</span>
+    </div>
+    <div class="face face--after">
+      <span class="face__bg" data-label="and the after goes here"></span>
+      <span class="face__state">After</span>
+      <span class="face__cue">click to flip back</span>
+    </div>
+  </div>
+</div>
+
+<div class="underbar">
+  <div class="wrap underbar__in">
+    <div class="ub">
+      <span class="ub__label">Services</span>
+      <span class="ub__val">Custom builds &amp; remodeling</span>
+    </div>
+    <div class="ub">
+      <span class="ub__label">We also</span>
+      <span class="ub__val">Buy houses as-is</span>
+    </div>
+    <div class="ub">
+      <span class="ub__label">Working in</span>
+      <span class="ub__val">Centre &amp; Mifflin County, PA</span>
+    </div>
+    <div class="ub">
+      <span class="ub__label">Call</span>
+      <a class="ub__val" href="tel:+18146992578">814-699-2578</a>
+    </div>
+  </div>
+</div>
+
+<div class="altbox">
+  <div class="wrap">
+    <span class="mark">no tagline up there on purpose. i wrote a few and they were all me guessing at how you actually work, which is worse than nothing. your photos say it better anyway</span>
+    <span class="mark">if you want a line there, tell me one sentence about how you pick a house and i'll write it properly. that's the part i can't invent</span>
+    <span class="mark">the flip is the logo, by the way — two houses, one's the other upside down. figured that was worth building the whole page around</span>
+  </div>
+</div>
+
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="work__head">
+      <p class="eyebrow">Recent projects</p>
+      <h2 class="h2" style="margin:0">Before, and after.</h2>
+      <span class="mark">same motion as up top, smaller. hover on a laptop, tap on your phone</span>
+    </div>
+    <div class="cards">
+      <button class="flip" aria-label="Flip to see the after photo">
+        <span class="flip__inner">
+          <span class="flip__face"><span class="photo" data-label="before"></span><span class="tag">Before</span>
+            <span class="flip__meta"><strong>Kitchen</strong><span>project name goes here</span></span></span>
+          <span class="flip__face flip__face--after"><span class="photo" data-label="after"></span><span class="tag">After</span>
+            <span class="flip__meta"><strong>Kitchen</strong><span>town / what you did</span></span></span>
+        </span>
+      </button>
+      <button class="flip" aria-label="Flip to see the after photo">
+        <span class="flip__inner">
+          <span class="flip__face"><span class="photo" data-label="before"></span><span class="tag">Before</span>
+            <span class="flip__meta"><strong>Exterior</strong><span>project name goes here</span></span></span>
+          <span class="flip__face flip__face--after"><span class="photo" data-label="after"></span><span class="tag">After</span>
+            <span class="flip__meta"><strong>Exterior</strong><span>town / what you did</span></span></span>
+        </span>
+      </button>
+      <button class="flip" aria-label="Flip to see the after photo">
+        <span class="flip__inner">
+          <span class="flip__face"><span class="photo" data-label="before"></span><span class="tag">Before</span>
+            <span class="flip__meta"><strong>Bath</strong><span>project name goes here</span></span></span>
+          <span class="flip__face flip__face--after"><span class="photo" data-label="after"></span><span class="tag">After</span>
+            <span class="flip__meta"><strong>Bath</strong><span>town / what you did</span></span></span>
+        </span>
+      </button>
+    </div>
+    <span class="mark">left empty on purpose — you've got 280 posts and i'd rather you pick the six you're proudest of than have me guess</span>
+  </div>
+</section>
+
+<section class="svc" id="services">
+  <div class="wrap">
+    <p class="eyebrow">What we do</p>
+    <h2 class="h2" style="max-width:16ch">Three ways we work on a house.</h2>
+    <div class="svc__grid">
+      <div class="svc__item">
+        <span class="svc__num">01</span><h3>Custom builds</h3>
+        <p>New construction, foundation to final walkthrough.</p>
+        <span class="mark mark--tight">pretty sure about this one. it's kind of self-evident</span>
+      </div>
+      <div class="svc__item">
+        <span class="svc__num">02</span><h3>Remodeling</h3>
+        <p>Kitchens, baths, additions, full-gut renovations.</p>
+        <span class="mark mark--tight">same. on a roll here</span>
+      </div>
+      <div class="svc__item">
+        <span class="svc__num">03</span><h3>We buy homes</h3>
+        <p>Single family, multi-family, and short-term rentals. As-is.</p>
+        <span class="mark mark--tight">assuming flip it implies this</span>
+      </div>
+    </div>
+    <span class="mark">all placeholder-level. one call and i'd write these in your words instead of mine</span>
+  </div>
+</section>
+
+<section class="sell" id="sell">
+  <div class="wrap sell__grid">
+    <div>
+      <p class="eyebrow">Selling a house that needs work</p>
+      <h2 class="h2">Skip the repairs, the listing, and the showings.</h2>
+      <p class="lede">Send an address. We'll come look at it and tell you what we can pay.</p>
+      <ul>
+        <li><strong>No repairs.</strong> We buy in whatever condition it's in.</li>
+        <li><strong>No agent commission.</strong> You're selling straight to the buyer.</li>
+        <li><strong>No cleanout.</strong> Leave what you don't want.</li>
+        <li><strong>You pick the closing date.</strong> Fast or slow, your call.</li>
+      </ul>
+      <span class="mark">this section gets the most room on purpose. some clients already find you through referrals some are googling, and right now google's has nothing to hand them we could fix that</span>
+      <span class="mark">the form's a house. rooms are the fields, the door's the button. super creative</span>
+    </div>
+    <div class="house">
+      <svg class="house__roof" viewBox="0 0 100 20" preserveAspectRatio="none" fill="none" aria-hidden="true">
+        <polyline points="0,20 50,1.5 100,20" stroke="#FFFFFF" stroke-width="3"
+                  stroke-linejoin="miter" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <div class="house__walls">
+        <div class="rooms">
+          <div class="room">
+            <label for="f-name">Your name</label>
+            <input id="f-name" type="text" autocomplete="name" placeholder="—">
+          </div>
+          <div class="room">
+            <label for="f-phone">Phone</label>
+            <input id="f-phone" type="tel" autocomplete="tel" placeholder="—">
+          </div>
+          <div class="room room--wide">
+            <label for="f-addr">Property address</label>
+            <input id="f-addr" type="text" autocomplete="street-address" placeholder="—">
+          </div>
+          <div class="room room--wide">
+            <label for="f-notes">Anything we should know</label>
+            <textarea id="f-notes" placeholder="—"></textarea>
+          </div>
+        </div>
+        <div class="yard">
+          <button class="door" type="button">Request an offer</button>
+        </div>
+      </div>
+      <span class="mark mark--tight">doesn't send anywhere yet. about ten minutes to wire into your outlook inbox</span>
+    </div>
+  </div>
+</section>
+
+<section class="area" id="area">
+  <div class="wrap">
+    <p class="eyebrow">Where we work</p>
+    <h2 class="h2">Centre, Mifflin, and everywhere in between.</h2>
+    <span class="mark mark--center">was gonna pull the county records to confirm which towns you actually work in but i'd been at this a while. cross out the wrong ones</span>
+    <div class="area__towns">
+      <span>State College</span><span>Bellefonte</span><span>Lewistown</span>
+      <span>Boalsburg</span><span>Port Matilda</span><span>Centre Hall</span>
+      <span>Pleasant Gap</span><span>Milroy</span><span>Reedsville</span>
+      <span>Philipsburg</span><span>Huntingdon</span><span>Burnham</span>
+    </div>
+    <span class="mark mark--center">looks like filler but it's the part that makes you show up for "bellefonte contractor." barely any competition on those</span>
+  </div>
+</section>
+
+<section class="pitch">
+  <div class="wrap">
+    <h2 class="h2">Okay, so that's the site.</h2>
+    <p>I'm Sam. I built this before emailing you because a mockup seemed more useful than a pitch. It's real code, not a picture it works on your phone, it loads fast, and it could be yours.</p>
+    <p>If you want it: I swap in your before/afters, put it on a real domain, and hook the form up so leads land in your inbox instead of your DMs.</p>
+    <p>If you don't, no hard feelings. Close the tab, costs you nothing.</p>
+    <p class="pitch__sign">erm. hire me.</p>
+    <div class="pitch__contact">
+      <a href="mailto:your@email.com">kingmaws7140@gmail.com</a>
+      <a href="tel:+10000000000">2403672085</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__in">
+      <div>
+        <a class="lockup" href="#top" style="margin-bottom:14px">
+          <svg width="34" height="25" viewBox="0 0 132 96" fill="none" aria-hidden="true">
+            <g stroke="#fff" stroke-width="7" transform="rotate(180 33 48)"><path d="M4 44 36 14 68 44"/><path d="M15 40v34h42V40"/></g>
+            <g stroke="#fff" stroke-width="7"><path d="M64 44 96 14 128 44"/><path d="M75 40v34h42V40"/></g>
+          </svg>
+          <span class="lockup__name">Flip It Co</span>
+        </a>
+      </div>
+      <div><a href="#work">Work</a><a href="#services">Services</a><a href="#sell">Sell your house</a></div>
+      <div>
+        <a href="tel:+18146992578">814-699-2578</a>
+        <a href="mailto:Flipitco@outlook.com">Flipitco@outlook.com</a>
+        <a href="https://www.instagram.com/_flipit.co/">Instagram</a>
+      </div>
+    </div>
+    <p class="foot__legal">Flip It Co LLC · Custom builds &amp; remodeling · Pennsylvania</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var t=document.getElementById('toggle');
+  t.addEventListener('click',function(){
+    var off=document.body.classList.toggle('notes-off');
+    t.textContent=off?'show my notes':'hide my notes';
+  });
+
+  var stage=document.getElementById('stage');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function turn(){
+    stage.classList.add('is-turning');
+    stage.classList.toggle('is-flipped');
+    setTimeout(function(){stage.classList.remove('is-turning')},1050);
+  }
+  stage.addEventListener('click',turn);
+  stage.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();turn();}
+  });
+  if(!reduce){setTimeout(turn,1500);}
+
+  if(!window.matchMedia('(hover: hover)').matches){
+    document.querySelectorAll('.flip').forEach(function(c){
+      c.addEventListener('click',function(){c.classList.toggle('is-flipped')});
+    });
+  }
+})();
+</script>
+</body>
+</html>
